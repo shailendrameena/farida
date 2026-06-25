@@ -67,7 +67,40 @@ setInterval(() => {
   changeSlide(1);
 }, 4000);
 
+
+// =========================
+// Mobile Swipe Support
+// =========================
+
+let startX = 0;
+let endX = 0;
+
+slider.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchmove", (e) => {
+  endX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend", () => {
+  const diff = startX - endX;
+
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      changeSlide(1);   // Left swipe → Next
+    } else {
+      changeSlide(-1);  // Right swipe → Previous
+    }
+  }
+
+  startX = 0;
+  endX = 0;
+});
  
+
+
+
 //  hamburger
   const mobileMenu = document.getElementById("mobileMenu");
   const overlay = document.getElementById("overlay");
